@@ -1,10 +1,14 @@
 import curses
 import cv2
+
 N_FRAMES = 500
 class LetterDisplay:
     def __init__(self):
         #get default video source
         self.video_source = cv2.VideoCapture(0)
+        if not self.video_source.isOpened():
+           print("Failed to open default video source. Exiting...")
+           exit(1)
         self.stdscr = curses.initscr()
         curses.noecho()
         curses.cbreak()
@@ -21,8 +25,6 @@ class LetterDisplay:
             self.draw(frame=frame)
             self.stdscr.refresh()
 
-
-
     def clean(self):
         curses.nocbreak()
         self.stdscr.keypad(False)
@@ -33,8 +35,6 @@ class LetterDisplay:
         max_height, max_width =  self.stdscr.getmaxyx()
         return cv2.resize(frame, (max_width, max_height))
 
-
-    
     def draw(self, frame):
         max_height, max_width =  self.stdscr.getmaxyx()
         n_levels : int = len(self.gradient_string)
@@ -51,7 +51,6 @@ class LetterDisplay:
                     self.stdscr.addstr(h, w, self.gradient_string[gradient_index])
                 except curses.error:
                     pass
-
 
 if __name__ == "__main__":
     display = LetterDisplay()
