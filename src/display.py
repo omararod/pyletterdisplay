@@ -25,7 +25,7 @@ class LetterDisplay:
             frame = self.scale(frame=frame)
             #draw the frame
             self.draw(frame=frame)
-            self.stdscr.refresh()
+            
 
     def clean(self):
         curses.nocbreak()
@@ -52,6 +52,7 @@ class LetterDisplay:
                     self.stdscr.addstr(h, w, self.gradient_string[gradient_index])
                 except curses.error:
                     pass
+        self.stdscr.refresh()
 
 if __name__ == "__main__":
     display = LetterDisplay()
