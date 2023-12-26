@@ -36,7 +36,6 @@ class LetterDisplay:
         return cv2.resize(frame, (max_width, max_height))
 
     def draw(self, frame):
-        max_height, max_width =  self.stdscr.getmaxyx()
         n_levels : int = len(self.gradient_string)
         bucket_size = int(256)/int(n_levels)
 
