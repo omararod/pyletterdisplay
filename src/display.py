@@ -21,7 +21,9 @@ class LetterDisplay:
             #get 1 video frame
             ret, frame = self.video_source.read()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            #scale the image to the size of the terminal
             frame = self.scale(frame=frame)
+            #draw the frame
             self.draw(frame=frame)
             self.stdscr.refresh()
 
